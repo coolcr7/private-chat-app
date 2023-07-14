@@ -5,7 +5,8 @@ This is an attempt to build an anonymous real-time chat app here are some functi
 4 User has the option to delete all chats, this will immediately delete chats from the database, user's browser and you will see an immediate effect on the UI <br>
 5 When logged in all the rooms relevant to users are displayed <br>  
 
-Here's a link to test this app https://coolcr7.github.io/private-chat-app/
+Here's a link to test this app https://coolcr7.github.io/private-chat-app <br>
+
 Following are steps explaining how the app functions:<br>
 
 SignIn with your Google account:
