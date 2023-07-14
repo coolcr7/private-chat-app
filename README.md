@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+This is an attempt to build an anonymous real-time chat app here are some functionality it aims to achieve:<br>
+1 Real-time chat<br>
+2 Create private rooms with secret keys to ensure the identity of user <br>
+3 Atmax two people can join a room <br>
+4 User has the option to delete all chats, this will immediately delete chats from the database, user's browser and you will see an immediate effect on the UI <br>
+5 When logged in all the rooms relevant to users are displayed <br>  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Following are steps explaining how the app functions:<br>
 
-## Available Scripts
+SignIn with your Google account:
 
-In the project directory, you can run:
+![1](https://github.com/coolcr7/private-chat-app/assets/70231909/c97635bf-d8b1-4d1b-95c5-f14bd3f2a568)
 
-### `npm start`
+![2](https://github.com/coolcr7/private-chat-app/assets/70231909/5c5942db-f61c-4b1c-b3ab-b05ae5673760)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This is the Basic UI<br>
+![3](https://github.com/coolcr7/private-chat-app/assets/70231909/ea4269d1-0d54-4ca6-b23a-fc96caaa3920)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+To create or join rooms select create rooms pane<br>
 
-### `npm test`
+![4](https://github.com/coolcr7/private-chat-app/assets/70231909/122386c2-93d3-4e69-b6c5-1c1277ccc0e3)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Click on "New Contact" and type in the secret phrase and room name you want <br>
+![6](https://github.com/coolcr7/private-chat-app/assets/70231909/8d96c638-6546-4770-9481-7785b0c5ac77)
 
-### `npm run build`
+To join the existing group Click "Search Conversation" and type in roomId received from the user and the secret key.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![5](https://github.com/coolcr7/private-chat-app/assets/70231909/77d27090-9c45-4da0-87f8-5fe453e86388)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
