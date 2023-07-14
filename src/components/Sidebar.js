@@ -35,7 +35,7 @@ export default function Sidebar() {
       console.log("sidebar mount")
     return (
         <div style={{width:"300px"}} className="d-flex flex-column ">
-            <div>{auth.currentUser.email}</div>
+            <div>{auth?.currentUser?.email}</div>
             <Tab.Container activeKey={activeState}>
                 <Nav variant="tabs"  onSelect={setActiveState}>
                     <Nav.Item>

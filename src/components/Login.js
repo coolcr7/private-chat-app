@@ -9,9 +9,9 @@ export default function Login({onSignIn}) {
   const handleId=async ()=>{
     try{
       const result=await signInWithPopup(auth,googleProvider).catch(()=>{alert("something went wrong")});
-      console.log(result.user.refreshToken)
+      console.log(result?.user?.refreshToken)
       cookies.set("auth-token",result.user.refreshToken)
-      onSignIn(result.user.refreshToken)
+      onSignIn(result?.user?.refreshToken)
       try{
         const dbRef=collection(db,"users")
         const q= query(dbRef,where("email","==",auth.currentUser.email))
