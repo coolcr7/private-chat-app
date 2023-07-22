@@ -42,6 +42,7 @@ export default function Sidebar() {
         setOpen(r => false)
     }
     return (
+<<<<<<< HEAD
         <div style={{ zIndex: "100" }} className={`position-fixed bg-light `}>
             <div style={{ height: "100vh", width: "300px" }} className={`d-flex flex-column   
                                         h-screen z-2 top-0  ${open ? '' : ' d-none '}`}>
@@ -50,6 +51,26 @@ export default function Sidebar() {
                     <button className={` cursor-pointer right-3 border-none  duration-200 ${!open ? "rotate-[405deg] position-absolute d-inline-block top-0" : ""} border-purple-950
       border-0   ${!open && "rotate-180 "} `}
                         onClick={closeSidebar}  >
+=======
+        <div style={{width:"300px"}} className="d-flex flex-column ">
+            <div>{auth?.currentUser?.email}</div>
+            <Tab.Container activeKey={activeState}>
+                <Nav variant="tabs"  onSelect={setActiveState}>
+                    <Nav.Item>
+                        <Nav.Link eventKey={conversation} >Conversation</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey={contacts} >Create Rooms</Nav.Link>
+                    </Nav.Item>
+                </Nav>
+                <Tab.Content className='border-end overflow-auto flex-grow-1'>
+                    <Tab.Pane eventKey={conversation}>
+                         <Conversations/>  
+                    </Tab.Pane>
+                    <Tab.Pane eventKey={contacts}>
+                    </Tab.Pane>
+                </Tab.Content>
+>>>>>>> e6b5f98d36a04dec9254c502593d678b40fafd4d
 
                         <GoX className='h-100 ' style={{ borderStyle: "none", width: "1.5rem" }} />
                     </button>
