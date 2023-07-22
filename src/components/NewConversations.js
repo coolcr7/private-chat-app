@@ -1,18 +1,18 @@
 import React, { useRef, useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
-import { db,auth } from '../config/firebase'
+import { db } from '../config/firebase'
 import { query,where,collection,getDocs,updateDoc,doc } from 'firebase/firestore'
+import { useConversation } from '../context/ConversationProvider'
 
 export default function NewConversations({ close }) {
+  const {user}=useConversation()
   const secretRef = useRef()
-  const roomRef = useRef()
   function handleSubmit(e) {
     e.preventDefault()
-    const secret=secretRef.current.value
-    const roomId=roomRef.current.value
+    const secret=secretRef.current?.value
     const conversationRef=collection(db,"converstation")
     const userRef=collection(db,"users")
-    const q= query(conversationRef,where("conversationId","==",roomId|| ""))
+    const q= query(conversationRef,where("secret","==",secret|| ""))
     getDocs(q).then((snapshot)=>{
       const data=snapshot.docs[0]?.data()
       if (!data){
@@ -20,17 +20,12 @@ export default function NewConversations({ close }) {
         alert("no such room")
         return
       }
-      if (data.secret!=secret){
-        close()
-        alert("wrong secret")
-        return 
-      }
       if (data.noOfUser>1){
         close()
         alert("room full")
         return
       }else if(data.noOfUser==1){
-        const q= query(userRef,where("email","==",auth.currentUser?.email|| ""))
+        const q= query(userRef,where("email","==",user|| ""))
         const docIdCoversation=snapshot.docs[0]?.id
         const docRefConversation=doc(db,"converstation",docIdCoversation)
         getDocs(q).then((snapshot)=>{
@@ -38,13 +33,25 @@ export default function NewConversations({ close }) {
             close()
             alert("no user found")
             return
-    
           }
-        
+
           const dataUser=snapshot.docs[0]?.data()
           const docId=snapshot.docs[0]?.id
           const docRef=doc(db,"users",docId)
-          const obj={roomId,room:data.roomName}
+          const obj={roomId:secret,room:data.roomName}
+          if (dataUser?.conversation){
+            let isIN=false
+            dataUser.conversation.forEach(r=>{
+              if (r?.roomId==secret){
+                isIN=true
+              }
+            })
+            if (isIN){
+              close()
+              alert("you are already in room")
+              return
+            }
+          }
           updateDoc(docRef,{
               conversation:[...dataUser.conversation,obj]
               
@@ -72,10 +79,6 @@ export default function NewConversations({ close }) {
           <Form.Group>
             <Form.Label for="1" >Secret phrase</Form.Label>
             <Form.Control ref={secretRef} id="1" type='text' />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label for="2" >Room ID</Form.Label>
-            <Form.Control ref={roomRef} id="2" type='text' />
           </Form.Group>
         </Form>
       </Modal.Body>

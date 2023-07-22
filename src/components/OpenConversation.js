@@ -1,13 +1,13 @@
 import React, { useState ,useCallback, useEffect } from 'react'
 import { useConversation } from '../context/ConversationProvider'
 import { Form,Button,InputGroup } from 'react-bootstrap'
-import { db,auth } from '../config/firebase'
+import { db } from '../config/firebase'
 import { query,where,collection,getDocs,updateDoc
          ,addDoc,doc,onSnapshot, serverTimestamp,orderBy, deleteDoc }                 from 'firebase/firestore'
 
 export default function OpenConversation(props) {
   
-  const {refreshState}=useConversation()
+  const {refreshState,user}=useConversation()
   console.log(props.id,"this is active id")
   const [selectedConversation,setSelectedConversation]=useState([])
   const dbRefConversation = collection(db, props.id||"1234")
@@ -41,7 +41,7 @@ useEffect(()=>{
      const conversationRef=collection(db,activeId)
      addDoc(conversationRef,{
       message:messa,
-      id:auth.currentUser.email,
+      id:user,
       createdAt:Date.now()
 
 
@@ -73,11 +73,11 @@ useEffect(()=>{
 
 
   return (
-    <div className='border flex-grow-1 d-flex flex-column '>
+    <div className='border z-0 flex-grow-1 d-flex flex-column '>
       <div className='overflow-auto flex-grow-1'>
         <div className='flex-column justify-content-end aligin-items-start d-flex' style={{'min-height':"100%"}}>
          {selectedConversation?.map((r,index)=>{
-            const you=r.id==auth.currentUser.email
+            const you=r.id==user
             const last=index==selectedConversation.lenght-1
             return(
             <div className={`d-flex flex-column m-2 align-self-start ${you?'align-self-end':""}`} key={index}>
@@ -95,9 +95,9 @@ useEffect(()=>{
    
       </div>
       <div>
-        <Form onSubmit={(e)=>(handleClick(e))}>
-       <InputGroup className="mb-3">
-       <Button onClick={handleDelete} variant="danger" id="button-addon1">
+        <Form onSubmit={(e)=>(handleClick(e))} >
+       <InputGroup className="mb-3 z-0">
+       <Button onClick={handleDelete} className="z-0" variant="danger" id="button-addon1">
           Delete
         </Button>
         <Form.Control
@@ -115,7 +115,7 @@ useEffect(()=>{
       </InputGroup>
       </Form>
       </div>
-      <div>{activeId}</div>
+      <div>ROOM SECRET PHRASE : {activeId}</div>
     </div>
   )
 }

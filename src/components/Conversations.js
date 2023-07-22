@@ -1,21 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useConversation } from '../context/ConversationProvider'
 import { ListGroup } from 'react-bootstrap'
-import { db, auth } from '../config/firebase'
+import { db } from '../config/firebase'
 import { query, where, onSnapshot, collection, getDocs } from 'firebase/firestore'
 export default function Conversations() {
   console.log("conversation mount")
   const [firebaseConversation, setFirebaseConversation] = useState([])
 
   // console.log("this is data",snapshot.docs[0]?.data()?.conversation)
-   
+  const {user}=useConversation()
   const dbRef = collection(db, "users")
   const dbRefConversation = collection(db, "converstation")
-  const q = query(dbRef, where("email", "==", auth.currentUser?.email || ""))
+  const q = query(dbRef, where("email", "==", user || ""))
   const [refresh, setRefresh] = useState(0)
   async function getData() {
       onSnapshot(q,(snapshot) => {
-      console.log("inside snapshot")
+      // console.log("inside snapshot")
       console.log(snapshot.docs[0]?.data().conversation, "this is test")
       setFirebaseConversation(snapshot.docs[0]?.data()?.conversation)
     }
@@ -26,8 +26,6 @@ export default function Conversations() {
   }, [refresh])
 
   console.log(firebaseConversation, "this is end")
-
-  const { formatedConversations: conversations } = useConversation()
   // console.log(conversations)
   const { setActiveId, activeId } = useConversation()
   const {setRefreshState}=useConversation()
@@ -42,9 +40,9 @@ export default function Conversations() {
 
   return (
     <div>
-      <div onClick={handleRefresh}>
+      <button onClick={handleRefresh}>
         refresh
-      </div>
+      </button>
       <ListGroup variant='flush' >
         {firebaseConversation && firebaseConversation.map((conversation) => (
           

@@ -5,13 +5,13 @@ import { useConversation } from "../context/ConversationProvider";
 
 
 function App() {
-  const {isLogin,setIsLogin} =useConversation()
+  const {user,setUser} =useConversation()
 
 
   return (
     <>
       <div className="App">
-        {isLogin&&isLogin!="" ? <Dashbord /> : <Login onSignIn={setIsLogin} />}
+        {user&&user!="" ? <Dashbord /> : <Login onSignIn={setUser} />}
       </div>
     </>
   );

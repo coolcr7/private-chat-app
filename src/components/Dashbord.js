@@ -7,10 +7,11 @@ export default function Dashbord() {
   const {activeId}=useConversation()
   console.log("dashbord mount")
   return (
+    <>
+    <Sidebar />
     <div style={{height:"100vh"}} className="d-flex">
-      <Sidebar />
-      {activeId&&activeId!=0 && <OpenConversation id={activeId}/>}
-      
+      {activeId && <OpenConversation  id={activeId}/>}
     </div>
+    </>
   )
 }
